@@ -7,20 +7,6 @@ This repository contains JavaScript implementations of common **Data Structures*
 
 ---
 
-## 📂 Files Overview
-
-| **File Name**         | **Description**                    | **Last Updated** |
-|-----------------------|------------------------------------|-------------------|
-| `array.js`            | Array-related problems and methods | 3 months ago      |
-| `fibonacciSequence.js`| Fibonacci sequence implementation  | 3 months ago      |
-| `map.js`              | Map object usage and examples      | 3 months ago      |
-| `object.js`           | Object manipulation and solutions  | 3 months ago      |
-| `queue.js`            | Queue data structure implementation| 3 months ago      |
-| `recursion.js`        | Recursion-based problems           | 3 months ago      |
-| `set.js`              | Set object usage and examples      | 3 months ago      |
-| `stack.js`            | Stack data structure implementation| 3 months ago      |
-
----
 
 ## 🚀 Features
 - JavaScript-based solutions.
