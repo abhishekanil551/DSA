@@ -1,45 +1,42 @@
-class queue{
-  constructor(){
-    this.items=[];
-    this.rear=0;
-    this.front=0;
+class queue {
+  constructor() {
+    this.items = [];
+    this.rear = 0;
+    this.front = 0;
   }
-  enqueue(element){
-    this.items[this.rear]=element;
+  enqueue(element) {
+    this.items[this.rear] = element;
     this.rear++;
   }
-  dequeue(element){
-    const item=this.items[this.front]
+  dequeue(element) {
+    const item = this.items[this.front];
     delete this.items[this.front];
     this.front++;
-    return item
+    return item;
   }
-  isEmpty(){
-    return this.rear- this.front===0
+  isEmpty() {
+    return this.rear - this.front === 0;
   }
-  peek(){
-    return this.items[this.front]
+  peek() {
+    return this.items[this.front];
   }
-  size(){
-    return this.rear-this.front
+  size() {
+    return this.rear - this.front;
   }
-  print(){
-  console.log(this.items)
+  print() {
+    console.log(this.items);
   }
-  
 }
 
-const Queue=new queue();
-console.log(Queue.isEmpty())
-Queue.enqueue(10)
-Queue.enqueue(20)
-Queue.enqueue(30)
-console.log(Queue.size)
-Queue.print()
-console.log(Queue.dequeue())
-console.log(Queue.peek())
-
-
+const Queue = new queue();
+console.log(Queue.isEmpty());
+Queue.enqueue(10);
+Queue.enqueue(20);
+Queue.enqueue(30);
+console.log(Queue.size);
+Queue.print();
+console.log(Queue.dequeue());
+console.log(Queue.peek());
 
 // Queue:-A queue is a linear data structure that follows the principle first in first out (FIFO)
 

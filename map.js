@@ -1,14 +1,16 @@
-const map = new Map([['a', 1], ['b', 2]]);
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
 
-map.set('c',3);
+map.set("c", 3);
 console.log("Map:", map);
-console.log("Get key 'b':", map.get('b'));
-map.delete('b');
-for(const[key,value] of map){
-    console.log(`${key}:${value}`);
+console.log("Get key 'b':", map.get("b"));
+map.delete("b");
+for (const [key, value] of map) {
+  console.log(`${key}:${value}`);
 }
-map.clear()
-
+map.clear();
 
 // Operations:
 // Insert (set)	O(1)	Adds or updates key-value pair

@@ -1,4 +1,4 @@
-const set=new Set();
+const set = new Set();
 
 set.add(10);
 set.add(20);
@@ -11,9 +11,6 @@ console.log("After delete 20:", set);
 console.log("Size:", set.size);
 console.log("Traverse:");
 set.forEach((el) => console.log(el));
-
-
-
 
 // Operations:
 // Add	O(1)	Adds a value if not already present

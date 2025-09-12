@@ -1,4 +1,4 @@
-let arr = [10, 20, 30, 40, 50]; 
+let arr = [10, 20, 30, 40, 50];
 
 console.log("Access index 2:", arr[2]);
 console.log("Traverse:");
@@ -9,15 +9,14 @@ arr.push(60);
 console.log("After push:", arr);
 arr.unshift(5);
 console.log("After unshift:", arr);
-arr.splice(3, 0, 25); 
+arr.splice(3, 0, 25);
 console.log("After insert at index 3:", arr);
 arr.pop();
 console.log("After pop:", arr);
 arr.shift();
 console.log("After shift:", arr);
-arr.splice(2, 1); 
+arr.splice(2, 1);
 console.log("After delete index 2:", arr);
-
 
 // Operations:
 // Access (by index)	O(1)	Constant time – direct access.
@@ -28,4 +27,3 @@ console.log("After delete index 2:", arr);
 // Delete from end	O(1)	Simply reduce the size.
 // Delete from beginning/mid	O(n)	Need to shift elements to fill the gap.
 // Traverse (loop over all)	O(n)	Required for actions like map, filter, reduce, etc.
-

@@ -1,7 +1,7 @@
 let person = {
   name: "Alice",
   age: 25,
-  city: "Delhi"
+  city: "Delhi",
 };
 
 console.log("Name:", person.name);
@@ -18,10 +18,6 @@ console.log("Traverse object:");
 for (let key in person) {
   console.log(`${key}: ${person[key]}`);
 }
-
-
-
-
 
 // Operations:
 // Insert (add key)	O(1)	Constant time
