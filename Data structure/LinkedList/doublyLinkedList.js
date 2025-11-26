@@ -10,7 +10,6 @@ class Node {
       this.head = null; 
       this.tail = null; 
     }
-  
     append(data) {
       const newNode = new Node(data);
   
