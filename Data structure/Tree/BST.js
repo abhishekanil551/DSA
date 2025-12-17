@@ -59,7 +59,7 @@ class BST{
 // Postorder (LRN) → Visit Left → Right → Node
     postorder(node=this.root){
         if(!node) return [];
-        return [...this.postorder(node.left),...this.postorder(node.right),node];
+        return [...this.postorder(node.left),...this.postorder(node.right),node.value];
     }
 
 // Level Order (BFS) → Visit level by level

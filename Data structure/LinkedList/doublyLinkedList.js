@@ -55,6 +55,10 @@ class Node {
       }
       console.log("Backward:", result.join(" <-> "));
     }
+
+    reverse(){
+      
+    }
   }
   
 
