@@ -1,56 +1,30 @@
+// hash table (NO collisions)
 class HashTable{
-    constructor(size){
-        this.table=new Array(size);
-        this.size=size;
+    constructor(size = 10){
+        this.table = new Array(size).fill(null);
+        this.size = 0; 
     }
-    hash(key){
-        let total=0
-        for(let i=0; i<key.length; i++){
-            total+=key.charCodeAt(i)
-        }
-        return total % this.size
+    _hash(key){
+        return key % this.table.length;
     }
-
-    set(key,value){
-        const index=this.hash(key)
-        this.table[index]=value
+    add(key,value){
+        const index = this._hash(key);
+        this.table[index] = value;
+        this.size++;
     }
-
-    get(key){   
-        const index=this.hash(key)
-        return this.table[index]
+    get(key){
+        const index = this._hash(key);
+        return this.table[index];   
     }
-
-    remove(key){
-        const index=this.hash(key)
-        this.table[index]=undefined
-    }
-
-    display(){
-        for(let i=0; i<this.table.length; i++){
-            if(this.table[i]){
-                console.log(i,this.table[i])
-            }
-        }
+    delete(key){
+        const index = this._hash(key);
+        this.table[index] = null;
+        this.size--;
     }
 }
 
+const hashtable = new HashTable();
+hashtable.add(12, "Alice");
+hashtable.add(23, "Bob");
 
-const table=new HashTable(20)
-table.set('name','abhishek')
-table.set('age',11)
-table.set('place',"kottayam")
-
-table.display()
-
-console.log(table.get('name'))
-console.log(table.get('age'))
-console.log(table.get('place'))
-
-table.remove('age')
-table.display()
-
-console.log(table.get('age'))
-console.log(table.get('place'))
-
-table.remove('place')
+console.log(hashtable.get(12));
