@@ -48,3 +48,13 @@ class HashTable {
         return false;
     }
 }
+
+
+
+const ht = new HashTable();
+
+ht.add(100, "Alice"); 
+ht.add(90, "Bob"); 
+
+console.log(ht.get(100)); 
+console.log(ht.get(90)); 
