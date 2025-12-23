@@ -10,6 +10,7 @@ for (let i = 1; i < arr.length; i++) {
   }
 }
 
+
 console.log(arr);
 
 // its flow
@@ -21,3 +22,14 @@ console.log(arr);
 // 3,4,2,5,8
 // 3,2,4,5,8
 // 2,3,4,5,8
+
+
+// let arr=[2,1,4,6,4]
+// for(let i = 1; i < arr.length; i++){
+//     let j = i;
+//     while(j > 0 && arr[j] < arr[j - 1]){
+//         [arr[j],arr[j - 1]] = [arr[j -1 ],arr[j]];
+//         j--;
+//     }
+// }
+// console.log(arr)

@@ -16,6 +16,19 @@ console.log("Sorted:", bubbleSort(arr));
 
 
 
+function bubbleSort1(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[j] > arr[j + 1]) {
+       [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      }
+    }
+  }
+  return arr;
+}
+
+let arr1 = [5, 3, 8, 4, 2];
+console.log("Sorted:", bubbleSort1(arr1));
 
 
 
@@ -31,12 +44,11 @@ function bubbleSort(arr1) {
                 swapped = true; 
             }
         }
-    } while (swapped);
+    } while (swapped);  
     return arr1;
 }
 
-let arr1 = [5, 3, 8, 4, 2];
-console.log("Sorted:", bubbleSort(arr));
-
+let arr2 = [5, 3, 8, 4, 2];
+console.log("Sorted:", bubbleSort(arr2));
 
 
