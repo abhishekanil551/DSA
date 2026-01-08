@@ -51,6 +51,7 @@ ht.add(7, "Bob");
 ht.add(17, "Charlie"); 
 ht.add(22, "David");   
 
+
 console.log(ht.get(17)); 
 
 ht.delete(7);
