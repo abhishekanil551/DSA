@@ -1,110 +1,108 @@
 class Node{
     constructor(value){
-        this.value=value;
-        this.left=null;
-        this.right=null;
+        this.value = value;
+        this.left = null;
+        this.right = null;
     }
 }
 class BST{
     constructor(){
-        this.root=null;
+        this.root = null;
     }
-    
+
     insert(value){
-        const node=new Node(value)
-        if(!this.root) return (this.root=node);
-        let current=this.root;
+        const newNode = new Node(value);
+        if(this.root === null){
+            this.root = newNode;
+            return this;
+        }
+        let current = this.root;
         while(true){
-            if(value<current.value){
-                if(!current.left) return current.left=node;
-                current=current.left;
-            }else if(value>current.value){
-                if(!current.right) return current.right=node;
-                current=current.right;
-            }else return ;
+            if(value < current.value){
+                if(current.left === null){
+                    current.left = newNode;
+                    return this;
+                }
+                current = current.left;
+            }else if(value > current.value){
+                if(current.right === null){
+                    current.right = newNode;
+                    return this;
+                }
+                current = current.right;
+            }else{
+                return this
+            }
         }
     }
 
-    find(value){
-        let current=this.root;
-        while(current){
-            if(current.value==value) return current;
-            current=value<current.value? current.left : current.right;
+    Search(value){
+        let current = this.root;
+        while(current !== null){
+            if(value === current.value) return true;
+            if(value < current.value) current = current.left;
+            else current = current.right;
         }
-        return null;
+        return false;
     }
 
-    min(node=this.root){
-        while(node.left) node=node.left;
-        return node.value;
+    delete(value){
+        this.root = this._deleteNode(this.root, value);
+        return this;
     }
-
-    max(node=this.root){
-        while(node.right) node=node.right;
-        return node.value;
-    }
-    
-// Inorder (LNR) → Visit Left → Node → Right
-    inorder(node=this.root){
-        if(!node)return [];
-        return [...this.inorder(node.left),node.value,...this.inorder(node.right)]
-    }
-
-// Preorder (NLR) → Visit Node → Left → Right
-    preorder(node=this.root){
-        if(!node) return [];
-        return [node.value,...this.preorder(node.left),...this.preorder(node.right)]
-    }
-
-// Postorder (LRN) → Visit Left → Right → Node
-    postorder(node=this.root){
-        if(!node) return [];
-        return [...this.postorder(node.left),...this.postorder(node.right),node.value];
-    }
-
-// Level Order (BFS) → Visit level by level
-    levelorder(){
-        if(!this.root) return [];
-        let res=[],q=[this.root];
-        while(q.length){
-            let node=q.shift();
-            res.push(node.value);
-            if(node.left) q.push(node.left);
-            if(node.right) q.push(node.right);
-        }
-        return res;
-    }
-
-    delete(value, node=this.root){
+    _deleteNode(node,value){
         if(!node) return null;
-        if(value<node.value){
-            node.left=this.delete(value,node.left);
-        }else if(value>node.value){
-            node.right=this.delete(value,node.right);
-        }else{
-            if(!node.left && !node.right) return null;
-            if(!node.left) return node.right;
-            if(!node.right) return node.left;
-            
-            let minRight=this.min(node.right);
-            node.value=minRight;
-            node.right=this.delete(minRight,node.right)
+        if(value < node.value){
+            node.left = this._deleteNode(node.left , value);
+            return node;
         }
+        if(value > node.value){
+            node.right = this._deleteNode(node.right , value);
+            return node;
+        }
+
+        // Case 1: No child
+        if(!node.right && !node.left){
+            return null;
+        }
+        // Case 2: One child
+        if(!node.left) return node.right;
+        if(!node.right) return node.left;
+
+        // Case 3: Two children
+        let successor = node.right;
+        while(successor.left !== null){
+            successor = successor.left;
+        }
+        node.value = successor.value;
+        node.right = this._deleteNode(node.right, successor.value);
         return node;
     }
 
+    // TRAVERSALS
 
+    inorder(node = this.root, result = []){
+        if(!root) return result;
+        this.inorder(node.left , result);
+        result.push(node.value);
+        this.inorder(node.right, result);
+        return result;
+    }
+
+    preorder(node = this.root, result = []){
+        if(!root) return result;
+        result.push(node.value);
+        this.preorder(node.left,result);
+        this.preorder(node.right,result);
+        return result;
+    }
+
+    postorder(node = this.root, result = []){
+        if(!root) return result;
+        this.postorder(node.right, result);
+        this.postorder(node.left, result);
+        result.push(node.value);
+        return result;
+    }
 
 }
-
-
-const tree = new BST();
-[8, 3, 10, 1, 6, 14, 4, 7, 13].forEach(x => tree.insert(x));
-
-console.log("Before delete:", tree.levelorder());
-
-tree.delete(6);
-
-console.log("After delete:", tree.levelorder());
-
-console.log("Inorder:", tree.inorder());

@@ -1,148 +1,160 @@
-class BTNode {
-    constructor(value) {
+class Node {
+    constructor(value){
         this.value = value;
         this.left = null;
         this.right = null;
     }
 }
 
-class BinaryTree {
-    constructor() {
-        this.root = null;
-    }
+const node = new Node(12)
+node.left = new Node(9);
+node.right = new Node(18);
+node.left.left = new Node(10);
 
-    // Insert in first empty spot (level order)
-    insert(value) {
-        const node = new BTNode(value);
-        if (!this.root) {
-            this.root = node;
-            return;
-        }
+// Preorder Traversal (Root → Left → Right)
 
-        const q = [this.root];
-        while (q.length) {
-            let curr = q.shift();
-
-            if (!curr.left) {
-                curr.left = node;
-                return;
-            }
-            if (!curr.right) {
-                curr.right = node;
-                return;
-            }
-
-            q.push(curr.left, curr.right);
-        }
-    }
-
-    // Search (BFS)
-    search(value) {
-        if (!this.root) return false;
-
-        const q = [this.root];
-        while (q.length) {
-            const node = q.shift();
-            if (node.value === value) return true;
-
-            if (node.left) q.push(node.left);
-            if (node.right) q.push(node.right);
-        }
-        return false;
-    }
-
-    // Delete (replace target with deepest node)
-    delete(value) {
-        if (!this.root) return;
-
-        let target = null, last = null, parentOfLast = null;
-        const q = [this.root];
-
-        while (q.length) {
-            let node = q.shift();
-
-            if (node.value === value) target = node;
-
-            if (node.left) {
-                parentOfLast = node;
-                last = node.left;
-                q.push(node.left);
-            }
-            if (node.right) {
-                parentOfLast = node;
-                last = node.right;
-                q.push(node.right);
-            }
-        }
-
-        if (target) {
-            target.value = last.value; 
-            if (parentOfLast.right === last) parentOfLast.right = null;
-            else parentOfLast.left = null;
-        }
-    }
-
-    // DFS
-    preorder(node = this.root, res = []) {
-        if (!node) return res;
-        res.push(node.value);
-        this.preorder(node.left, res);
-        this.preorder(node.right, res);
-        return res;
-    }
-
-    inorder(node = this.root, res = []) {
-        if (!node) return res;
-        this.inorder(node.left, res);
-        res.push(node.value);
-        this.inorder(node.right, res);
-        return res;
-    }
-
-    postorder(node = this.root, res = []) {
-        if (!node) return res;
-        this.postorder(node.left, res);
-        this.postorder(node.right, res);
-        res.push(node.value);
-        return res;
-    }
-
-    // BFS
-    bfs() {
-        if (!this.root) return [];
-        const q = [this.root], res = [];
-        while (q.length) {
-            const n = q.shift();
-            res.push(n.value);
-            if (n.left) q.push(n.left);
-            if (n.right) q.push(n.right);
-        }
-        return res;
-    }
-
-    height(node = this.root) {
-        if (!node) return 0;
-        return 1 + Math.max(this.height(node.left), this.height(node.right));
-    }
-
-    count(node = this.root) {
-        if (!node) return 0;
-        return 1 + this.count(node.left) + this.count(node.right);
-    }
-
-    leaves(node = this.root, arr = []) {
-        if (!node) return arr;
-        if (!node.left && !node.right) arr.push(node.value);
-        this.leaves(node.left, arr);
-        this.leaves(node.right, arr);
-        return arr;
-    }
-
-    // Pretty print
-    print(node = this.root, prefix = "", isLeft = true) {
-        if (!node) return;
-        console.log(prefix + (isLeft ? "├── " : "└── ") + node.value);
-        this.print(node.left, prefix + (isLeft ? "│   " : "    "), true);
-        this.print(node.right, prefix + (isLeft ? "│   " : "    "), false);
-    }
+function preorder(node,result = []){
+    if(!node) return result;
+    result.push(node.value);
+    preorder(node.left,result);
+    preorder(node.right,result);
+    return result;
 }
+
+console.log('preorder = ',preorder(node));
+
+// Inorder Traversal (Left → Root → Right)
+
+function inorder(node,result = []){
+    if(!node) return result;
+    inorder(node.left,result);
+    result.push(node.value);
+    inorder(node.right, result);
+    return result;
+}
+
+console.log('inorder = ',inorder(node));
+
+// Postorder Traversal (Left → Right → Root)
+
+function postorder(node,result = []){
+    if(!node) return result;
+    postorder(node.left,result);
+    postorder(node.right,result);
+    result.push(node.value);
+    return result;
+}
+
+console.log('postorder = ',postorder(node))
+
+// Level Order Traversal (BFS)
+
+function levelorder(node) {
+  if (!node) return [];
+
+  const result = [];
+  const queue = [node];
+  let front = 0;
+
+  while (front < queue.length) {
+    const current = queue[front++];
+    result.push(current.value);
+
+    if (current.left) queue.push(current.left);
+    if (current.right) queue.push(current.right);
+  }
+
+  return result;
+}
+
+console.log("levelorder =",levelorder(node));
+
+// max depth
+
+function maxdepth(node){
+    if(!node) return 0;
+    let left = maxdepth(node.left);
+    let right = maxdepth(node.right);
+    return 1 + Math.max(left,right)
+}
+
+console.log('maxdepth = ',maxdepth(node))
+
+
+// Count Total Nodes
+
+function countNodes(node){
+    if(!node) return 0;
+    return 1 + countNodes(node.left) + countNodes(node.right);
+}
+
+console.log('count nodes = ',countNodes(node))
+
+// Count Leaf Nodes
+
+function countLeafNodes(node){
+    if(!node) return 0;
+    if(!node.left && !node.right) return 1;
+    return countLeafNodes(node.left) + countLeafNodes(node.right);
+}
+
+console.log('count Leaf Nodes = ',countLeafNodes(node))
+
+// Check Balanced Tree
+
+function isBalanced(root){
+    function height(node){
+        if(!node) return 0;
+        let left = height(node.left);
+        if(left === -1) return -1;
+        let right = height(node.right);
+        if(right === -1 ) return -1;
+        if(Math.abs(left - right ) > 1) return -1;
+        return 1 + Math.max(left,right);
+    }
+      return height(root) !== -1;
+}
+
+console.log("isBalanced = ",isBalanced(node))
+
+// Diameter of Binary Tree
+
+function diameter(root){
+    let max = 0;
+    function dfs(node){
+        if(!node) return 0;
+        let left = dfs(node.left);
+        let right = dfs(node.right);
+        max = Math.max(max,left+right);
+        return 1 + Math.max(left,right)
+    }
+    dfs(root);
+    return max;
+}
+
+console.log("diameter = ",diameter(node))
+
+// LCA (Lowest Common Ancestor)
+
+function lca(node, x, y) {
+  if (!node) return null;
+
+  if (node.value === x || node.value === y) return node;
+
+  const left = lca(node.left, x, y);
+  const right = lca(node.right, x, y);
+
+  if (left && right) return node;
+
+  return left || right;
+}
+
+
+
+
+
+
+
+
+
+
