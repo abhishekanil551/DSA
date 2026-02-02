@@ -37,7 +37,7 @@ g.addEdge('A', 'C');
 g.addEdge('B', 'D');
 g.print();
 
-Weighted example:
+// Weighted example:
 const wg = new Graph(false);
 wg.addEdge('A', 'B', 5);
 wg.addEdge('A', 'C', 3);
